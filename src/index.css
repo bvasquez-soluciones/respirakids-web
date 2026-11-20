@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@theme {
+  --font-heading: "Poppins", sans-serif;
+  --font-body: "Inter", sans-serif;
+
+  --color-petroleo: #1A3C34;
+  --color-petroleo-light: #2E5C50;
+  --color-teal: #2E86AB;
+  --color-teal-light: #E6F3F8;
+  --color-alerta-rojo: #D9534F;
+  --color-alerta-amarillo: #E9B949;
+  --color-alerta-verde: #3FA96A;
+  --color-cta: #EC5A2E;
+  --color-cta-hover: #D64A20;
+
+  --radius-card: 1rem;
+  --radius-pill: 999px;
+
+  --shadow-card: 0 4px 20px rgba(0,0,0,0.06);
+}
+
+body {
+  font-family: "Inter", sans-serif;
+}
+
+h1, h2, h3, h4 {
+  font-family: "Poppins", sans-serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
