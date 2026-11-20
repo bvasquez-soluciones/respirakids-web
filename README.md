@@ -6,7 +6,7 @@ Sitio informativo de **RespiraKids**, la aplicación de orientación y prevenci�
 
 ## Tecnología
 
-React + TypeScript + Vite + Tailwind CSS + Framer Motion.
+React + TypeScript + Vite + Tailwind CSS + Framer Motion + Three.js.
 
 ## Desarrollo
 
@@ -17,7 +17,7 @@ npm run dev
 
 Variables opcionales (.env):
 
-- `VITE_API_URL`: dirección del backend (evaluación y formulario de contacto). Sin ella, la versión publicada muestra un aviso en esas secciones.
+- `VITE_API_URL`: dirección del backend (formulario de contacto). Sin ella, la versión publicada muestra el correo de contacto y la evaluación corre en el navegador.
 - `VITE_APP_URL`: dirección pública de la aplicación, para los botones "Empezar ahora" e "Iniciar sesión".
 - `VITE_BASE`: subruta de publicación (por ejemplo `/respirakids-web/`).
 

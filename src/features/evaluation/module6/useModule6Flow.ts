@@ -73,6 +73,7 @@ export function useModule6Flow() {
   return {
     phase,
     profile,
+    answers,
     currentQuestion,
     currentIndex,
     totalQuestions,

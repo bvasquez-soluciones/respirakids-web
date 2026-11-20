@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { LungVisual3D } from "./3d/LungVisual3D";
+import { LungVisual3D, type LungVisualState } from "./3d/LungVisual3D";
+import type { ObservableAnswers } from "./module6/types";
 import { ProgressBar } from "./ProgressBar";
 import { ProcessingScreen } from "./ProcessingScreen";
 import { ChildProfileStep } from "./module6/ChildProfileStep";
@@ -7,9 +8,20 @@ import { FieldQuestionCard } from "./module6/FieldQuestionCard";
 import { EngineResultScreen } from "./module6/EngineResultScreen";
 import { useModule6Flow } from "./module6/useModule6Flow";
 
+const DANGER_SIGN_FIELDS: (keyof ObservableAnswers)[] = [
+  "cyanosis",
+  "unableToDrinkOrFeed",
+  "alteredConsciousness",
+  "visibleChestIndrawing",
+  "nasalFlaring",
+  "grunting",
+  "apnea",
+];
+
 export function EvaluationFlow() {
   const {
     phase,
+    answers,
     currentQuestion,
     currentIndex,
     totalQuestions,
@@ -18,6 +30,10 @@ export function EvaluationFlow() {
     startQuestions,
     answerCurrent,
   } = useModule6Flow();
+
+  // Los pulmones se tornan rojos en cuanto se marca un signo de alarma general.
+  const dangerSignMarked = DANGER_SIGN_FIELDS.some((field) => answers[field] === true);
+  const questionLungState: LungVisualState = dangerSignMarked ? "rojo" : "neutral";
 
   return (
     <div className="flex min-h-screen flex-col items-center bg-white px-4 py-8 sm:px-6 sm:py-10">
@@ -43,7 +59,7 @@ export function EvaluationFlow() {
             exit={{ opacity: 0 }}
             className="flex w-full flex-col items-center"
           >
-            <LungVisual3D state="neutral" />
+            <LungVisual3D state={questionLungState} />
             <div className="mt-6 flex w-full flex-col items-center">
               {totalQuestions > 0 && <ProgressBar current={currentIndex + 1} total={totalQuestions} />}
               <div className="mt-8 flex w-full justify-center">
@@ -75,7 +91,7 @@ export function EvaluationFlow() {
           <motion.div key="error" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center">
             <p className="text-alerta-rojo">{errorMessage || "Ocurrió un error al procesar la evaluación."}</p>
             <p className="mt-2 text-sm text-petroleo/70">
-              Verifica que el backend esté corriendo en http://localhost:4000 y recarga la página.
+              Recarga la página e inténtalo de nuevo.
             </p>
           </motion.div>
         )}
